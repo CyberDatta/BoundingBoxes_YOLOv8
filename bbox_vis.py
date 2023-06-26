@@ -1,8 +1,9 @@
 # purpose of this file is to render the bounding boxes
 import numpy as np
+import cv2
 
 #below function carries first release version of the library? can we even call it one at this point
-def render_boxes(results,class_colors,font_class_colors,font_id,font_scale):
+def render_boxes_image(results,class_colors,font_class_colors,font_id,font_scale):
     # class ids of the yolo v8 ultralytics results
     coordinates_ordered_list_classes=results[0].boxes.cls.cpu()
     coordinates_ordered_list_classes=coordinates_ordered_list_classes.numpy()
@@ -16,4 +17,12 @@ def render_boxes(results,class_colors,font_class_colors,font_id,font_scale):
 
     working_length=len(coordinates_ordered_list_classes)
     for object_id in range(0,working_length):
-        pass   
+
+        start_point=(int(coordinates_ordered_list[object_id][0]),int(coordinates_ordered_list[object_id][1]))
+        end_point=(int(coordinates_ordered_list[object_id][2]),int(coordinates_ordered_list[object_id][3]))
+
+        img=cv2.rectangle(img,start_point,end_point,class_colors[coordinates_ordered_list[object_id]],3)
+
+        img=cv2.putText(img,classes[coordinates_ordered_list[object_id]],start_point,font_id,font_scale,font_class_colors[coordinates_ordered_list[object_id]],3)
+
+    return img
