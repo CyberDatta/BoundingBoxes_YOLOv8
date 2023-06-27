@@ -3,7 +3,7 @@ import numpy as np
 import cv2
 
 #below function carries first release version of the library? can we even call it one at this point
-def render_boxes_image(results,class_colors,font_class_colors,font_id,font_scale):
+def render_boxes(results,class_colors,font_class_colors,font_id,font_scale):
     # class ids of the yolo v8 ultralytics results
     coordinates_ordered_list_classes=results[0].boxes.cls.cpu()
     coordinates_ordered_list_classes=coordinates_ordered_list_classes.numpy()
