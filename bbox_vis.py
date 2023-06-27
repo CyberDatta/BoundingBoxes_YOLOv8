@@ -21,8 +21,8 @@ def render_boxes_image(results,class_colors,font_class_colors,font_id,font_scale
         start_point=(int(coordinates_ordered_list[object_id][0]),int(coordinates_ordered_list[object_id][1]))
         end_point=(int(coordinates_ordered_list[object_id][2]),int(coordinates_ordered_list[object_id][3]))
 
-        img=cv2.rectangle(img,start_point,end_point,class_colors[coordinates_ordered_list[object_id]],3)
+        img=cv2.rectangle(img,start_point,end_point,class_colors[int(coordinates_ordered_list_classes[object_id])],3)
 
-        img=cv2.putText(img,classes[coordinates_ordered_list[object_id]],start_point,font_id,font_scale,font_class_colors[coordinates_ordered_list[object_id]],3)
+        img=cv2.putText(img,classes[int(coordinates_ordered_list_classes[object_id])],start_point,font_id,font_scale,font_class_colors[int(coordinates_ordered_list_classes[object_id])],3)
 
     return img
